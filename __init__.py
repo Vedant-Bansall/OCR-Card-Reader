@@ -37,7 +37,37 @@ def option_select() -> None:
             with open(image_path, "w") as Paths:
                 for image in open_files:
                     Paths.write(image + "\n")
+
+            #add API key to config.json function
+            def add_api_config():
+                #debug - showInfo(f"Attempting to save: '{api_line_edit.text()}'")
+                config = mw.addonManager.getConfig(__name__)
+                config["api_key"] = api_line_edit.text()
+                mw.addonManager.writeConfig(__name__, config)
+                #more debugging - saved = mw.addonManager.getConfig(__name__)
+                #also this - showInfo(str(saved))
+
+            #Close File Option
+            file_option.close()
+
             #API Key Input
+            api_label = QLabel("Please enter a Google Gemini API Key. Click enter to continue once inputted.")
+            api_label.setStyleSheet("font: 20px Fredo; font-weight: bold; padding-top: 20px; padding-bottom: 15px;")
+            tutorial_label = QLabel(f'To see a tutorial on how to create one, <a href="https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH">Click here</a>')
+            tutorial_label.setOpenExternalLinks(True)
+            api_box_layout = QVBoxLayout()
+            api_line_edit = QLineEdit()
+            api_line_edit.setPlaceholderText("Enter API Key")
+            api_key = api_line_edit.returnPressed.connect(lambda: add_api_config())
+            api_dialog = QDialog(mw)
+            api_dialog.setModal(True)
+            api_dialog.setWindowTitle("API Key")
+            api_box_layout.addWidget(api_label)
+            api_box_layout.addWidget(api_line_edit)
+            api_box_layout.addWidget(tutorial_label)
+            api_dialog.setLayout(api_box_layout)
+            api_dialog.exec()
+
         elif btn == take_photo_btn:
             take_image()
         elif btn == cancel_btn:
