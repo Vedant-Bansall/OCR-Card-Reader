@@ -5,4 +5,4 @@ This is an anki addon where you can scan a flashcard in real life and it will cr
 You need every file and folder otherwise the addon will not work
 
 ##Contact me
-If the addon does not work please contact me via [my discord](https://discordapp/users/1092881580453802064)
+If the addon does not work please contact me via [my discord](https://discord.com/users/1092881580453802064)
