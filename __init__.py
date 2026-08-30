@@ -1,11 +1,16 @@
 #Libraries from aqt
 from aqt import mw
-from aqt.utils import showInfo #This is not needed once the take photo feature is made
+from aqt.utils import showInfo, showWarning  # This is not needed once the take photo feature is made
 from aqt.qt import *
 from aqt.qt import QDialog, QDialogButtonBox, QAction, QLabel, QVBoxLayout, QFrame, QLineEdit
 
 #Path Library for real cd
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent / "libs"))
+
+from . import double_image_scan
 
 #Option Select GUI
 def option_select() -> None:
@@ -21,7 +26,7 @@ def option_select() -> None:
     box_layout.addWidget(label)
     line.setFrameShape(QFrame.Shape.HLine)
     box_layout.addWidget(line)
-    file_select_btn = button_box.addButton("Select file", QDialogButtonBox.ButtonRole.AcceptRole)
+    file_select_btn = button_box.addButton("Select 2 files", QDialogButtonBox.ButtonRole.AcceptRole)
     take_photo_btn = button_box.addButton("Take Photo", QDialogButtonBox.ButtonRole.ActionRole)
     cancel_btn = button_box.addButton("Cancel", QDialogButtonBox.ButtonRole.RejectRole)
     button_box.setStyleSheet("display: flex; width: 65px; height: 20px; margin-right: 10px; margin-left: 10px; border: 2px solid darkgrey; margin-top: 15px; margin-bottom: 7.5px; justify-content: spaced-evenly; padding-left: 25px; padding-right: 25px;")
@@ -39,37 +44,40 @@ def option_select() -> None:
                     Paths.write(image + "\n")
 
             if len(open_files) > 0:
-                #add API key to config.json function
-                def add_api_config():
-                    #debug - showInfo(f"Attempting to save: '{api_line_edit.text()}'")
-                    config = mw.addonManager.getConfig(__name__)
-                    config["api_key"] = api_line_edit.text()
-                    mw.addonManager.writeConfig(__name__, config)
-                    api_label.close()
-                    #more debugging - saved = mw.addonManager.getConfig(__name__)
-                    #also this - showInfo(str(saved))
+                if len(open_files) == 2:
+                    #add API key to config.json function
+                    def add_api_config():
+                        #debug - showInfo(f"Attempting to save: '{api_line_edit.text()}'")
+                        config = mw.addonManager.getConfig(__name__)
+                        config["api_key"] = api_line_edit.text()
+                        mw.addonManager.writeConfig(__name__, config)
+                        api_dialog.close()
+                        #more debugging - saved = mw.addonManager.getConfig(__name__)
+                        #also this - showInfo(str(saved))
 
-                #Close File Option
-                file_option.close()
+                    #Close File Option
+                    file_option.close()
 
-                #API Key Input
-                api_label = QLabel("Please enter a Google Gemini API Key. Click enter to continue once inputted.")
-                api_label.setStyleSheet("font: 20px Fredo; font-weight: bold; padding-top: 20px; padding-bottom: 15px;")
-                tutorial_label = QLabel(f'To see a tutorial on how to create one, <a href="https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH">Click here</a>')
-                tutorial_label.setOpenExternalLinks(True)
-                api_box_layout = QVBoxLayout()
-                api_line_edit = QLineEdit()
-                api_line_edit.setPlaceholderText("Enter API Key")
-                api_key = api_line_edit.returnPressed.connect(lambda: add_api_config())
-                api_dialog = QDialog(mw)
-                api_dialog.setModal(True)
-                api_dialog.setWindowTitle("API Key")
-                api_box_layout.addWidget(api_label)
-                api_box_layout.addWidget(api_line_edit)
-                api_box_layout.addWidget(tutorial_label)
-                api_dialog.setLayout(api_box_layout)
-                api_dialog.exec()
-
+                    #API Key Input
+                    api_label = QLabel("Please enter a Google Gemini API Key. Click enter to continue once inputted.")
+                    api_label.setStyleSheet("font: 20px Fredo; font-weight: bold; padding-top: 20px; padding-bottom: 15px;")
+                    tutorial_label = QLabel(f'To see a tutorial on how to create one, <a href="https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH">Click here</a>')
+                    tutorial_label.setOpenExternalLinks(True)
+                    api_box_layout = QVBoxLayout()
+                    api_line_edit = QLineEdit()
+                    api_line_edit.setPlaceholderText("Enter API Key")
+                    api_key = api_line_edit.returnPressed.connect(lambda: add_api_config())
+                    api_dialog = QDialog(mw)
+                    api_dialog.setModal(True)
+                    api_dialog.setWindowTitle("API Key")
+                    api_box_layout.addWidget(api_label)
+                    api_box_layout.addWidget(api_line_edit)
+                    api_box_layout.addWidget(tutorial_label)
+                    api_dialog.setLayout(api_box_layout)
+                    api_dialog.exec()
+                else:
+                    file_option.close()
+                    showWarning("Please insert 2 files (Front and Back respectively)!")
             else:
                 file_option.close()
 
