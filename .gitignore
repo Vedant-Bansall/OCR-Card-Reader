@@ -1,5 +1,4 @@
 meta.json
 .venv/
 __pycache__/
-ImagePaths.txt
 .idea/

@@ -1,5 +1,6 @@
 #Imports
 #Qt
+from PyQt6.QtCore import QTimer
 from aqt.qt import QThread, qconnect, pyqtSignal, QDialog, QLabel, QVBoxLayout, QTextEdit, QFrame, Qt, QPushButton, QComboBox, QHBoxLayout
 from aqt.utils import showCritical
 from aqt import mw
@@ -258,6 +259,34 @@ def start_scan():
     background = Background(api_key)
     qconnect(background.scan_finished, scan_handler)
     qconnect(background.error_signal, show_error)
+
+    dot_count = 0
+
+    def loading_animation():
+        nonlocal dot_count
+        loading_label.setText(f"Scanning{'.' * (dot_count % 3 + 1)}")
+        dot_count += 1
+
+    global loading_dialog
+    loading_dialog = QDialog(mw)
+    loading_dialog.setModal(True)
+    loading_dialog.setWindowTitle("Scanning...")
+
+    global timer
+    timer = QTimer()
+    timer.timeout.connect(loading_animation)
+    timer.setInterval(333)
+    timer.start()
+
+    loading_label = QLabel()
+    loading_label.setStyleSheet("font-size: 32px; padding: 2rem;")
+
+    loading_box = QVBoxLayout()
+    loading_box.addWidget(loading_label)
+
+    loading_dialog.setLayout(loading_box)
+    loading_dialog.show()
+
     background.start()
 
 def scan_handler(front_text: str, back_text: str) -> None:
@@ -276,6 +305,8 @@ def scan_handler(front_text: str, back_text: str) -> None:
         mw.addonManager.writeConfig(__name__, config)
         back_dialog.close()
         deck_select()
+
+    loading_dialog.close()
 
     #Back Text Editor
     back_dialog = QDialog(mw)
@@ -354,6 +385,7 @@ def scan_handler(front_text: str, back_text: str) -> None:
 
 def show_error(error: str) -> None:
     showCritical(str(error))
+    loading_dialog.close()
 
 def deck_select():
     def confirm_deck():
@@ -398,9 +430,6 @@ def card_creation():
     config = mw.addonManager.getConfig(__name__)
     question = config["card_front"]
     answer = config["card_back"]
-
-    #Test
-    showCritical("card_creation proceeding")
 
     #Create card
     deck = mw.col.decks.by_name(config["selected_deck"])
