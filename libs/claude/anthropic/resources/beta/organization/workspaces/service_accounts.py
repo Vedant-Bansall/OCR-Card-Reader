@@ -18,6 +18,7 @@ from ....._response import (
 )
 from .....pagination import SyncPageCursor, AsyncPageCursor
 from ....._base_client import AsyncPaginator, make_request_options
+from .....types.beta.organization import BetaNoBillingWorkspaceRole
 from .....types.anthropic_beta_param import AnthropicBetaParam
 from .....types.beta.organization.workspaces import (
     service_account_add_params,

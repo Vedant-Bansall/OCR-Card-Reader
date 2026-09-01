@@ -1,6 +1,6 @@
 #Imports
 #Qt
-from aqt.qt import QAction, QThread, qconnect, pyqtSignal, QDialog, QLabel, QVBoxLayout, QTextEdit, QFrame, Qt, QPushButton, QComboBox
+from aqt.qt import QThread, qconnect, pyqtSignal, QDialog, QLabel, QVBoxLayout, QTextEdit, QFrame, Qt, QPushButton, QComboBox, QHBoxLayout
 from aqt.utils import showCritical
 from aqt import mw
 
@@ -215,7 +215,7 @@ def start_scan():
                 try:
                     #create front
                     front_interaction = client.responses.create(
-                        model="gpt-5.6-mini",
+                        model="gpt-5.4-mini",
                         input=[
                             {
                                 "role": "user",
@@ -232,7 +232,7 @@ def start_scan():
 
                     #create back
                     back_interaction = client.responses.create(
-                        model="gpt-5.6-mini",
+                        model="gpt-5.4-mini",
                         input=[
                             {
                                 "role": "user",
@@ -265,6 +265,7 @@ def scan_handler(front_text: str, back_text: str) -> None:
         front_text_edited = front_editor.toPlainText()
         config = mw.addonManager.getConfig(__name__)
         config["card_front"] = front_text_edited
+        mw.addonManager.writeConfig(__name__, config)
         front_dialog.close()
         back_dialog.exec()
 
@@ -272,6 +273,7 @@ def scan_handler(front_text: str, back_text: str) -> None:
         back_text_edited = back_editor.toPlainText()
         config = mw.addonManager.getConfig(__name__)
         config["card_back"] = back_text_edited
+        mw.addonManager.writeConfig(__name__, config)
         back_dialog.close()
         deck_select()
 
@@ -367,7 +369,7 @@ def deck_select():
     #Deck select
     deck_dialog = QDialog(mw)
     deck_dialog.setModal(True)
-    deck_dialog.setFixedSize(400, 200)
+    deck_dialog.setFixedSize(450, 200)
     deck_dialog.setWindowTitle("Deck Select")
 
     deck_label = QLabel("Select the deck you\n want to add this card to")
@@ -379,12 +381,16 @@ def deck_select():
     deck_select.addItems(all_decks)
 
     deck_confirm = QPushButton("Confirm")
-    deck_confirm.setFixedSize(75, 30)
+    deck_confirm.setFixedSize(110, 30)
     deck_confirm.clicked.connect(confirm_deck)
+
+    deck_row = QHBoxLayout()
+    deck_row.addWidget(deck_select)
+    deck_row.addWidget(deck_confirm)
 
     deck_box = QVBoxLayout()
     deck_box.addWidget(deck_label)
-    deck_box.addWidget(deck_select)
+    deck_box.addLayout(deck_row)
     deck_dialog.setLayout(deck_box)
     deck_dialog.exec()
 
@@ -393,13 +399,16 @@ def card_creation():
     question = config["card_front"]
     answer = config["card_back"]
 
+    #Test
+    showCritical("card_creation proceeding")
+
     #Create card
     deck = mw.col.decks.by_name(config["selected_deck"])
     note_type = mw.col.models.by_name("Basic")
     flashcard = mw.col.new_note(note_type)
     flashcard["Front"] = question
     flashcard["Back"] = answer
-    mw.col.add_note(flashcard, deck.id)
+    mw.col.add_note(flashcard, deck["id"])
 
 # Testing
 # action = QAction("Image Scan Test", mw)

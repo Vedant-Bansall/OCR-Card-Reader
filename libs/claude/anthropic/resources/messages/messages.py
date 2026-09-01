@@ -11,6 +11,7 @@ import httpx2
 import pydantic
 
 from ...types import (
+    ThinkingConfigParam,
     message_create_params,
     message_count_tokens_params,
 )

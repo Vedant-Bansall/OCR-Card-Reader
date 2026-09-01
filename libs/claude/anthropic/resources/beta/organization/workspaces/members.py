@@ -16,6 +16,7 @@ from ....._response import (
 )
 from .....pagination import SyncPage, AsyncPage
 from ....._base_client import AsyncPaginator, make_request_options
+from .....types.beta.organization import BetaWorkspaceRole, BetaNoBillingWorkspaceRole
 from .....types.beta.organization.workspaces import member_add_params, member_list_params, member_update_params
 from .....types.beta.organization.beta_workspace_role import BetaWorkspaceRole
 from .....types.beta.organization.beta_workspace_member import BetaWorkspaceMember

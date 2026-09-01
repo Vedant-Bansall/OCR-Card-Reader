@@ -94,7 +94,7 @@ def option_select() -> None:
 
                             else:
                                 config_3 = mw.addonManager.getConfig(__name__)
-                                config_3["api_key"] = api_line_edit.text()
+                                config_3["claude_api_key"] = api_line_edit.text()
                                 mw.addonManager.writeConfig(__name__, config_3)
                                 api_dialog.close()
 
@@ -107,7 +107,7 @@ def option_select() -> None:
 
                             else:
                                 config_3 = mw.addonManager.getConfig(__name__)
-                                config_3["api_key"] = api_line_edit.text()
+                                config_3["gemini_api_key"] = api_line_edit.text()
                                 mw.addonManager.writeConfig(__name__, config_3)
                                 api_dialog.close()
 
@@ -121,7 +121,7 @@ def option_select() -> None:
 
                             else:
                                 config_3 = mw.addonManager.getConfig(__name__)
-                                config_3["api_key"] = api_line_edit.text()
+                                config_3["OpenAI_api_key"] = api_line_edit.text()
                                 mw.addonManager.writeConfig(__name__, config_3)
                                 api_dialog.close()
 
@@ -135,7 +135,7 @@ def option_select() -> None:
                     api_label.setStyleSheet("font: 20px Fredo; font-weight: bold; padding-top: 20px; padding-bottom: 15px;")
                     tutorial_label = QLabel(f'To see a tutorial on how to create a claude api key, <a href="https://youtu.be/vgncj7MJbVU?si=uZRm9WaEkbO4xn2X">Click here</a>; To see a tutorial on how to create a gemini api key, <a href="https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH">Click here</a>; To see a tutorial on how to create a ChatGPT api key, <a href="https://youtu.be/SzPE_AE0eEo?si=e1edO44gxAK1uV_p">Click here</a>')
                     tutorial_label.setOpenExternalLinks(True)
-                    info_label = QLabel("NOTE: if you have already previously entered an API key from a provider you have used this script on before (e.g you have previously inserted a gemini key), click enter with nothing in the input bar but you must have used that provider the most recent time you have ran this addon.")
+                    info_label = QLabel("NOTE: if you have already previously entered an API key from a provider you have used this script on before (e.g you have previously inserted a gemini key), click enter with nothing in the input bar.")
                     api_box_layout = QVBoxLayout()
                     api_line_edit = QLineEdit()
                     api_line_edit.setPlaceholderText("Enter API Key")

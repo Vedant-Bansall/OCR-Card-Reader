@@ -39,6 +39,9 @@ from ....lib.tools import (
 from ...._constants import DEFAULT_TIMEOUT, MODEL_NONSTREAMING_TOKENS
 from ...._streaming import Stream, AsyncStream
 from ....types.beta import (
+    BetaFallbacksParam,
+    BetaDiagnosticsParam,
+    BetaThinkingConfigParam,
     message_create_params,
     message_count_tokens_params,
 )

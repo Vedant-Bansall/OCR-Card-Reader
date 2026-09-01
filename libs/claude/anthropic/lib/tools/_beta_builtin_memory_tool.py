@@ -11,6 +11,15 @@ from typing_extensions import override, assert_never
 from anyio import Path as AsyncPath
 from anyio.to_thread import run_sync
 
+from anthropic.types.beta import (
+    BetaMemoryTool20250818ViewCommand,
+    BetaMemoryTool20250818CreateCommand,
+    BetaMemoryTool20250818DeleteCommand,
+    BetaMemoryTool20250818InsertCommand,
+    BetaMemoryTool20250818RenameCommand,
+    BetaMemoryTool20250818StrReplaceCommand,
+)
+
 from ._files import read_text_exact
 from ..._models import construct_type_unchecked
 from ...types.beta import (

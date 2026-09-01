@@ -7,7 +7,7 @@ from typing_extensions import Self, Iterator, Awaitable, AsyncIterator, assert_n
 import httpx2
 from pydantic import BaseModel
 
-from claude.anthropic.types.tool_use_block import ToolUseBlock
+from anthropic.types.tool_use_block import ToolUseBlock
 from anthropic.types.server_tool_use_block import ServerToolUseBlock
 
 from ._types import (

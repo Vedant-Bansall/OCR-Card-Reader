@@ -20,6 +20,7 @@ from ...._response import (
 from ....pagination import SyncPageCursor, AsyncPageCursor
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.beta.memory_stores import (
+    BetaManagedAgentsMemoryView,
     memory_list_params,
     memory_create_params,
     memory_delete_params,
@@ -82,7 +83,8 @@ class Memories(SyncAPIResource):
           path: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
               with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
               Must not contain empty segments, `.` or `..` segments, control or format
-              characters, and must be NFC-normalized. Paths are case-sensitive.
+              characters, or the Unicode line and paragraph separators (U+2028, U+2029), and
+              must be NFC-normalized. Paths are case-sensitive.
 
           view: Query parameter for view
 
@@ -217,9 +219,10 @@ class Memories(SyncAPIResource):
 
           path: New path for the memory (a rename). Must start with `/`, contain at least one
               non-empty segment, and be at most 1,024 bytes. Must not contain empty segments,
-              `.` or `..` segments, control or format characters, and must be NFC-normalized.
-              Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to
-              leave the path unchanged.
+              `.` or `..` segments, control or format characters, or the Unicode line and
+              paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are
+              case-sensitive. The memory's `id` is preserved across renames. Omit to leave the
+              path unchanged.
 
           precondition: Optimistic-concurrency precondition: the update applies only if the memory's
               stored `content_sha256` equals the supplied value. On mismatch, the request
@@ -474,7 +477,8 @@ class AsyncMemories(AsyncAPIResource):
           path: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
               with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
               Must not contain empty segments, `.` or `..` segments, control or format
-              characters, and must be NFC-normalized. Paths are case-sensitive.
+              characters, or the Unicode line and paragraph separators (U+2028, U+2029), and
+              must be NFC-normalized. Paths are case-sensitive.
 
           view: Query parameter for view
 
@@ -609,9 +613,10 @@ class AsyncMemories(AsyncAPIResource):
 
           path: New path for the memory (a rename). Must start with `/`, contain at least one
               non-empty segment, and be at most 1,024 bytes. Must not contain empty segments,
-              `.` or `..` segments, control or format characters, and must be NFC-normalized.
-              Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to
-              leave the path unchanged.
+              `.` or `..` segments, control or format characters, or the Unicode line and
+              paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are
+              case-sensitive. The memory's `id` is preserved across renames. Omit to leave the
+              path unchanged.
 
           precondition: Optimistic-concurrency precondition: the update applies only if the memory's
               stored `content_sha256` equals the supplied value. On mismatch, the request

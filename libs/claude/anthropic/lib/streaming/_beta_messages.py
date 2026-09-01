@@ -8,9 +8,9 @@ from typing_extensions import Self, Iterator, Awaitable, AsyncIterator, assert_n
 import httpx2
 from pydantic import BaseModel
 
-from claude.anthropic.types.beta.beta_tool_use_block import BetaToolUseBlock
-from claude.anthropic.types.beta.beta_mcp_tool_use_block import BetaMCPToolUseBlock
-from claude.anthropic.types.beta import BetaServerToolUseBlock
+from anthropic.types.beta.beta_tool_use_block import BetaToolUseBlock
+from anthropic.types.beta.beta_mcp_tool_use_block import BetaMCPToolUseBlock
+from anthropic.types.beta.beta_server_tool_use_block import BetaServerToolUseBlock
 
 from ..._types import NotGiven, not_given
 from ..._utils import consume_sync_iterator, consume_async_iterator
@@ -556,6 +556,10 @@ def accumulate_event(
         current_snapshot.usage.output_tokens = event.usage.output_tokens
         if event.context_management is not None:
             current_snapshot.context_management = event.context_management
+        # only sent on `message_delta` after a mid-stream fallback, in which case it
+        # replaces the `message_start` value; otherwise that value must survive
+        if event.input_transformations is not None:
+            current_snapshot.input_transformations = event.input_transformations
 
         # Usage counts on a message_delta are cumulative totals, so they overwrite rather
         # than add; optional ones are omitted when not applicable, in which case the

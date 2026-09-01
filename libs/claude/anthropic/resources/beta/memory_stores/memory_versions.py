@@ -21,6 +21,8 @@ from ...._response import (
 from ....pagination import SyncPageCursor, AsyncPageCursor
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.beta.memory_stores import (
+    BetaManagedAgentsMemoryView,
+    BetaManagedAgentsMemoryVersionOperation,
     memory_version_list_params,
     memory_version_retrieve_params,
 )
