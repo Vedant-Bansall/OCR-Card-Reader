@@ -11,7 +11,7 @@ def start_scan():
     global background
     config = mw.addonManager.getConfig(__name__)
 
-    #Claude's code (get it?, GET IT?, HAHAHAHHA I'M SO FUNNY HAHAHAHAH (im sorry))
+    #Claude's code (get it?, GET IT?, HAHAHAHHA I'M SO FUNNY HAHAHAHAH (I'm sorry))
     if config["provider"] == "Claude":
         import anthropic
         import base64
@@ -439,8 +439,3 @@ def card_creation():
     flashcard["Front"] = question
     flashcard["Back"] = answer
     mw.col.add_note(flashcard, deck["id"])
-
-# Testing
-# action = QAction("Image Scan Test", mw)
-# qconnect(action.triggered, start_scan)
-# mw.form.menuTools.addAction(action)
