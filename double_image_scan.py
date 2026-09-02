@@ -1,7 +1,6 @@
 #Imports
 #Qt
-from PyQt6.QtCore import QTimer
-from aqt.qt import QThread, qconnect, pyqtSignal, QDialog, QLabel, QVBoxLayout, QTextEdit, QFrame, Qt, QPushButton, QComboBox, QHBoxLayout
+from aqt.qt import QThread, qconnect, pyqtSignal, QDialog, QLabel, QVBoxLayout, QTextEdit, QFrame, Qt, QPushButton, QComboBox, QHBoxLayout, QTimer
 from aqt.utils import showCritical
 from aqt import mw
 
@@ -307,6 +306,7 @@ def scan_handler(front_text: str, back_text: str) -> None:
         deck_select()
 
     loading_dialog.close()
+    timer.stop()
 
     #Back Text Editor
     back_dialog = QDialog(mw)
@@ -386,6 +386,7 @@ def scan_handler(front_text: str, back_text: str) -> None:
 def show_error(error: str) -> None:
     showCritical(str(error))
     loading_dialog.close()
+    timer.stop()
 
 def deck_select():
     def confirm_deck():

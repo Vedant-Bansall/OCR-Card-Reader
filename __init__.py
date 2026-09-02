@@ -24,7 +24,7 @@ def option_select() -> None:
     box_layout.addWidget(label)
     line.setFrameShape(QFrame.Shape.HLine)
     box_layout.addWidget(line)
-    file_select_btn = button_box.addButton("Select 2 files", QDialogButtonBox.ButtonRole.AcceptRole)
+    file_select_btn = button_box.addButton("Select files 1-by-1", QDialogButtonBox.ButtonRole.AcceptRole)
     take_photo_btn = button_box.addButton("Take Photo", QDialogButtonBox.ButtonRole.ActionRole)
     cancel_btn = button_box.addButton("Cancel", QDialogButtonBox.ButtonRole.RejectRole)
     button_box.setStyleSheet("display: flex; width: 65px; height: 20px; margin-right: 10px; margin-left: 10px; border: 2px solid darkgrey; margin-top: 15px; margin-bottom: 7.5px; justify-content: spaced-evenly; padding-left: 25px; padding-right: 25px;")
