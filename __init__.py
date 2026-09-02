@@ -162,7 +162,9 @@ def option_select() -> None:
 
     # File select functions:
     def select_files():
-        open_files, _ = QFileDialog.getOpenFileNames(mw, "Select files", '', "Image Files (*.jpeg *.jpg *.jpe *.png *.avif)")
+        open_front, _ = QFileDialog.getOpenFileName(mw, "Select front of card", '', "Image Files (*.jpeg *.jpg *.jpe *.png *.avif)")
+        open_back, _ = QFileDialog.getOpenFileName(mw, "Select back of card", '',"Image Files (*.jpeg *.jpg *.jpe *.png *.avif)")
+        open_files = [open_front, open_back]
         return open_files
 
     def take_image():
