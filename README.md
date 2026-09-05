@@ -4,20 +4,31 @@ This is an anki addon where you can scan a flashcard in real life and it will cr
 ### WARNING: Files Required
 You need every file and folder otherwise the addon will not work
 
-### Contact me
-If the addon does not work please contact me via [my discord](https://discord.com/users/1092881580453802064)
+## Setup
+You need to download this repo AS A **ZIP**
 
-### How to use
-Download the following files:
+Upon downloading the repo (**AZ A ZIP FILE**), go into Drive:/Users/User/AppData/Roaming/Anki2/addons21 then UNZIP the file.
+
+Make sure the following files:
   - __init__.py
   - double_image_scan.py
   - ImagePaths.txt
   - manifest.json
   - config.json
+  - libs/
 
-and keep the content the same in all of them, do not edit anything, leave imagepaths empty, make sure the names match this repo (CHARACTER FOR CHARACTER, case sensitive)
+are in the folder (CHARACTER FOR CHARACTER, case sensitive). Make sure all the contents of libs are there too.
 
-Make an api key from the following companies (click them for tutorial)
+##First Time use
+To use this, you click on the top tab of tools and then OCR Card Reader (OR the shortcut ctrl+shift+r)
+
+Make an api key from the following companies (click them for tutorial):
+
   -[Claude](https://youtu.be/vgncj7MJbVU?si=uZRm9WaEkbO4xn2X)
   -[Gemini](https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH)
   -[OpenAI/ChatGPT](https://youtu.be/SzPE_AE0eEo?si=e1edO44gxAK1uV_p)
+
+In the addon, make sure you have selected provider and then pasted your API Key for that provider, your API Key saves so to not overwrite it (for each respective AI), click enter in the prompt with nothing in it, not even a space. it saves for each provider (Claude api key saves for claude etc.)
+
+### Contact me
+If the addon does not work please contact me via [my discord](https://discord.com/users/1092881580453802064)
