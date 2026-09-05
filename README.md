@@ -19,6 +19,18 @@ Make sure the following files:
 
 are in the folder (CHARACTER FOR CHARACTER, case sensitive). Make sure all the contents of libs are there too.
 
+The File Tree should look like Drive:/Users/User/AppData/Roaming/Anki2/addons21/OCR_Card_Reader-|
+------------------------------------------------------------------------------------------------
+|
+|-libs/
+|-__init__.py
+|-double_image_scan.py
+|-ImagePaths.txt
+|-config.json
+|-manifest.json
+
+It may not be that order but that is what it should look like
+
 ## First Time use
 To use this, you click on the top tab of tools and then OCR Card Reader (OR the shortcut ctrl+shift+r)
 
