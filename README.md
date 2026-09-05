@@ -19,14 +19,14 @@ Make sure the following files:
 
 are in the folder (CHARACTER FOR CHARACTER, case sensitive). Make sure all the contents of libs are there too.
 
-##First Time use
+## First Time use
 To use this, you click on the top tab of tools and then OCR Card Reader (OR the shortcut ctrl+shift+r)
 
 Make an api key from the following companies (click them for tutorial):
 
-  -[Claude](https://youtu.be/vgncj7MJbVU?si=uZRm9WaEkbO4xn2X)
-  -[Gemini](https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH)
-  -[OpenAI/ChatGPT](https://youtu.be/SzPE_AE0eEo?si=e1edO44gxAK1uV_p)
+  - [Claude](https://youtu.be/vgncj7MJbVU?si=uZRm9WaEkbO4xn2X)
+  - [Gemini](https://youtu.be/Cl4XKgz6EJQ?si=4MlxM4faNWoTgugH)
+  - [OpenAI/ChatGPT](https://youtu.be/SzPE_AE0eEo?si=e1edO44gxAK1uV_p)
 
 In the addon, make sure you have selected provider and then pasted your API Key for that provider, your API Key saves so to not overwrite it (for each respective AI), click enter in the prompt with nothing in it, not even a space. it saves for each provider (Claude api key saves for claude etc.)
 
